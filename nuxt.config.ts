@@ -1,49 +1,65 @@
-// https://nuxt.com/docs/api/configuration/nuxt-config
-export default defineNuxtConfig({
+// nuxt.config.ts
+export default {
+  // ──────────────────────────────────────────────────────
+  // Enable Nuxt Studio
+  studio: {
+    enabled: true
+  },
+
+  // ──────────────────────────────────────────────────────
+  // Content module (with Studio live‑preview API)
   content: {
-    // enable Studio’s live-preview API
     preview: {
       api: 'https://api.nuxt.studio'
     }
-  },                  // ← comma added here
+  },
+
+  // ──────────────────────────────────────────────────────
+  // Modules (Studio must come first)
   modules: [
-    '@nuxt/eslint',
-    '@nuxt/image',
-    '@nuxt/ui-pro',
-    '@nuxt/content',
-    '@vueuse/nuxt',
-    'nuxt-og-image'
+    '@nuxthq/studio',   // Nuxt Studio
+    '@nuxt/image',      // Image optimization
+    '@nuxt/ui-pro',     // Nuxt UI Pro
+    '@nuxt/content',    // File‑based CMS
+    '@vueuse/nuxt',     // VueUse composables
+    'nuxt-og-image'     // Dynamic OG images
   ],
 
+  // ──────────────────────────────────────────────────────
+  // Enable Vue devtools in development
   devtools: {
     enabled: true
   },
 
-  css: ['~/assets/css/main.css'],
+  // ──────────────────────────────────────────────────────
+  // Global CSS
+  css: [
+    '~/assets/css/main.css'
+  ],
 
+  // ──────────────────────────────────────────────────────
+  // Custom route rules
   routeRules: {
-    '/docs': { redirect: '/docs/getting-started', prerender: false }
+    '/docs': {
+      redirect: '/docs/getting-started',
+      prerender: false
+    }
   },
 
+  // ──────────────────────────────────────────────────────
+  // Future and compatibility flags
   future: {
     compatibilityVersion: 4
   },
-
   compatibilityDate: '2024-07-11',
 
+  // ──────────────────────────────────────────────────────
+  // Nitro prerender settings
   nitro: {
     prerender: {
       routes: ['/'],
       crawlLinks: true
     }
-  },
-
-  eslint: {
-    config: {
-      stylistic: {
-        commaDangle: 'never',
-        braceStyle: '1tbs'
-      }
-    }
   }
-})
+}
+
